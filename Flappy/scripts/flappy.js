@@ -100,6 +100,17 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
                                 gameOver = true;
                                 textArray[0].show();
                                 textLayer.draw();
+                                // Edit: 09.06.2014 - пилето умира с корема нагоре
+                                // ето това  стартира анимация dead
+                                flappy.image.animation('dead');                               
+                                // след втория кадър на анимация dead я спираме
+                                // спрайта и dead са грозни в момента, имат нужда от пипване
+                                var frameCount = 0;
+                                flappy.image.on('frameIndexChange', function (evt) {
+                                    if (flappy.image.animation() === 'dead' && ++frameCount > 2) {
+                                        flappy.image.stop();
+                                    }
+                                });
                             }
                         }
                     } // for
@@ -109,13 +120,11 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
 
                     // генерираме нов стълб и го нареждаме в опашката
                     if (countedFrames < 0) { // това 100 ще бъде рандом време
-                        //console.log(countedFrames);
                         generateObstacles(obstaclesLayer);
                         countedFrames = countedFrames = getRandomValue(2, 10) * 30;;
-                        //console.log(countedFrames);
                     }
 
-                    // score???
+                    // score
                     doScore(textLayer);
 
                 } // !gameOver
@@ -137,15 +146,36 @@ function detectObstacleCollision(a, b) { // a, b са правоъгълници
 
     // птичето се движи отляво надясно и го смятаме за правоъгълник засега, 
     // тук тества само горен десен и долен десен ъгъл, ще добавя и другите после
-    var gotCollision = pointIsInsideRectangle(aRight, aTop, bTop, bBottom, bLeft, bRight) ||
-        pointIsInsideRectangle(aRight, aBottom, bTop, bBottom, bLeft, bRight);
+    //var gotCollision = pointIsInsideRectangle(aRight, aTop, bTop, bBottom, bLeft, bRight) ||
+    //    pointIsInsideRectangle(aRight, aBottom, bTop, bBottom, bLeft, bRight);
+
+    // Edit 09.06.2014 - птицата вече не е правоъгълник, затова ще правя проверки по точки по контура
+    // В папка images\bird-helper съм намацала приблизително точките, първата е тази над опашката,
+    // следващите са по часовниковата стрелка
+    var gotCollision = pointIsInsideRectangle(aLeft, aTop + 19, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 8, aTop + 12, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 14, aTop + 6, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 18, aTop, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 25, aTop, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 30, aTop + 12, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 42, aTop + 12, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 49, aTop + 25, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 43, aTop + 29, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 33, aTop + 29, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 30, aTop + 34, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 25, aBottom, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 15, aBottom, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 6, aTop + 32, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft, aTop + 30, bTop, bBottom, bLeft, bRight) ||
+            pointIsInsideRectangle(aLeft + 8, aTop + 12, bTop, bBottom, bLeft, bRight);
+
 
     return gotCollision;
 }
 
 function detectWallCollision(a) {
-    var gotCollision = a.getPosition().x > 580 || a.getPosition().y > 380 ||
-                       a.getPosition().y <= 0; // тези цифри на променливи
+    // Edit 09.06.2014 - коригирана долна граница, проверката по х не ни трябва
+    var gotCollision = a.getPosition().y > (400 - 38) || a.getPosition().y <= 0; // тези цифри на променливи
 
     return gotCollision;
 }

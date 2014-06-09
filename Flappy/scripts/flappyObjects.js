@@ -3,16 +3,35 @@
     var imageObj = new Image(),
         flappyImage;
 
-    imageObj.src = 'images/bird.png';
+    imageObj.src = 'images/bird-sprite.png';
 
     // да свърши работата след като се е заредила картинката
+    // Edit 09.06.2014 - флапъра вече е анимиран
+    // кадрите са в bird-sprite.png, долу се вижда как се задават, 
+    // за всеки кадър задаваме координати на горен ляв ъгъл в спрайта и размер на кадъра
     imageObj.onload = function () {
-        flappyImage = new Kinetic.Image({
+        flappyImage = new Kinetic.Sprite({
             x: 100,
             y: 200,
             image: imageObj,
-            width: 50,
-            height: 50
+            animation: 'flying',
+            animations: {
+                flying: [
+                  // x, y, width, height (4 frames)
+                  0, 0, 50, 38,
+                  54, 1, 50, 38,
+                  108, 0, 50, 38,
+                  162, 1, 50, 38
+                ],
+                dead: [
+                  // x, y, width, height (4 frames)
+                  240, 0, 50, 38,
+                  294, 0, 50, 38,
+                  346, 0, 50, 38
+                ]
+            },
+            frameRate: 7,
+            frameIndex: 0
         });
         flappy = {
             image: flappyImage,
@@ -20,7 +39,10 @@
         };
         birdLayer.add(flappy.image);
         birdLayer.draw();
+        // ето това  стартира зададената анимация -> animation: 'flying'
+        flappy.image.start();
     };
+
 }
 
 function generateObstacles(obstaclesLayer) {
