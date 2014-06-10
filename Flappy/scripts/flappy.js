@@ -121,7 +121,7 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
                     // генерираме нов стълб и го нареждаме в опашката
                     if (countedFrames < 0) { // това 100 ще бъде рандом време
                         generateObstacles(obstaclesLayer);
-                        countedFrames = countedFrames = getRandomValue(2, 10) * 30;;
+                        countedFrames = countedFrames = getRandomValue(3, 5) * 30;
                     }
 
                     // score
