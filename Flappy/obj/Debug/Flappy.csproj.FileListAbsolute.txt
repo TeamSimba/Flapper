@@ -1,6 +1,0 @@
-C:\Users\Konstantin\Documents\GitHub\Flapper\Flappy\bin\Flappy.dll.config
-C:\Users\Konstantin\Documents\GitHub\Flapper\Flappy\bin\Flappy.dll
-C:\Users\Konstantin\Documents\GitHub\Flapper\Flappy\bin\Flappy.pdb
-C:\Users\Konstantin\Documents\GitHub\Flapper\Flappy\obj\Debug\Flappy.csprojResolveAssemblyReference.cache
-C:\Users\Konstantin\Documents\GitHub\Flapper\Flappy\obj\Debug\Flappy.dll
-C:\Users\Konstantin\Documents\GitHub\Flapper\Flappy\obj\Debug\Flappy.pdb

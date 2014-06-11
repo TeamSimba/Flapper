@@ -4,7 +4,7 @@
     // [1] - score
     // [2] - start game
 
-    var newText = createText(250, 200, 'GAME OVER', 20, 'Candara', '#000');
+    var newText = createText(240, 180, 'GAME OVER', 25, 'Candara', 'black');
     textLayer.add(newText);
     textLayer.draw();
     textArray.push(newText);
@@ -14,7 +14,7 @@
     textLayer.draw();
     textArray.push(newText);
 
-    var startText = createText(200, 100, 'START GAME', 25, 'Verdana', '#00f');
+    var startText = createText(220, 180, 'START GAME', 25, 'Verdana', '#00f');
     textLayer.add(startText);
     textLayer.draw();
     textArray.push(startText);
@@ -38,6 +38,10 @@ function createText(x, y, text, fontSize, fontFamily, fill) {
         fontSize: fontSize,
         fontFamily: fontFamily,
         fill: fill,
+        shadowColor: 'yellow',
+        shadowBlur: 2,
+        shadowOffset: { x: 2, y: 2 },
+        shadowOpacity: 0.5,
         visible: false,
     });
 

@@ -103,11 +103,11 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
                                 // Edit: 09.06.2014 - пилето умира с корема нагоре
                                 // ето това  стартира анимация dead
                                 flappy.image.animation('dead');                               
-                                // след втория кадър на анимация dead я спираме
-                                // спрайта и dead са грозни в момента, имат нужда от пипване
+                                // след 10-ия кадър на анимация dead я спираме
+                                // спрайта и dead са все още грозни
                                 var frameCount = 0;
                                 flappy.image.on('frameIndexChange', function (evt) {
-                                    if (flappy.image.animation() === 'dead' && ++frameCount > 2) {
+                                    if (flappy.image.animation() === 'dead' && ++frameCount > 10) {
                                         flappy.image.stop();
                                     }
                                 });
