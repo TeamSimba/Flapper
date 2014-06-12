@@ -37,7 +37,7 @@ function startMenu(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
 function main(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     //textArray[1].show();
     //textLayer.draw();
-
+    
     createFlappy(birdLayer);
 
     doBackground(backgroundLayer)
