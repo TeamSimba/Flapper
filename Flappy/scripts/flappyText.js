@@ -59,10 +59,10 @@
         rect.hide();
         instructions.hide();
         startText.hide();
-
-        main(birdLayer, obstaclesLayer, textLayer, backgroundLayer); // оттук стартира играта
         textArray[1].show();
         textArray[5].show();
+        main(birdLayer, obstaclesLayer, textLayer, backgroundLayer); // оттук стартира играта
+        
     });
 
     restartText.on('mousedown', function () {

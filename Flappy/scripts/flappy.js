@@ -98,7 +98,7 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
                             var bumpedObstacle = detectObstacleCollision(flappy.image, obstaclesArray[i]);
                             var bumpedWall = detectWallCollision(flappy.image); // птиче блъска стена
                             if (bumpedObstacle || bumpedWall) {
-                                console.log('BUMP');
+                                //console.log('BUMP');
                                 gameOver = true;
                                 textArray[0].show();
                                 textLayer.draw();
@@ -154,6 +154,7 @@ function detectObstacleCollision(a, b) { // a, b са правоъгълници
     // Edit 09.06.2014 - птицата вече не е правоъгълник, затова ще правя проверки по точки по контура
     // В папка images\bird-helper съм намацала приблизително точките, първата е тази над опашката,
     // следващите са по часовниковата стрелка
+    /*
     var gotCollision = pointIsInsideRectangle(aLeft, aTop + 19, bTop, bBottom, bLeft, bRight) ||
             pointIsInsideRectangle(aLeft + 8, aTop + 12, bTop, bBottom, bLeft, bRight) ||
             pointIsInsideRectangle(aLeft + 14, aTop + 6, bTop, bBottom, bLeft, bRight) ||
@@ -170,7 +171,23 @@ function detectObstacleCollision(a, b) { // a, b са правоъгълници
             pointIsInsideRectangle(aLeft + 6, aTop + 32, bTop, bBottom, bLeft, bRight) ||
             pointIsInsideRectangle(aLeft, aTop + 30, bTop, bBottom, bLeft, bRight) ||
             pointIsInsideRectangle(aLeft + 8, aTop + 12, bTop, bBottom, bLeft, bRight);
-
+            */
+    // 13.06.2014 - опит за колизии със сталагмитите коварни
+    var gotCollision = pointIsInsidePilar(aLeft, aTop + 19, b)||
+        pointIsInsidePilar(aLeft + 8, aTop + 12, b) ||
+        pointIsInsidePilar(aLeft + 14, aTop + 6, b) ||
+        pointIsInsidePilar(aLeft + 18, aTop, b) ||
+        pointIsInsidePilar(aLeft + 25, aTop, b) ||
+        pointIsInsidePilar(aLeft + 30, aTop + 12, b) ||
+        pointIsInsidePilar(aLeft + 42, aTop + 12, b) ||
+        pointIsInsidePilar(aLeft + 49, aTop + 25, b) ||
+        pointIsInsidePilar(aLeft + 43, aTop + 29, b) ||
+        pointIsInsidePilar(aLeft + 33, aTop + 29, b) ||
+        pointIsInsidePilar(aLeft + 30, aTop + 34, b) ||
+        pointIsInsidePilar(aLeft + 15, aBottom, b) ||
+        pointIsInsidePilar(aLeft + 6, aTop + 32, b) ||
+        pointIsInsidePilar(aLeft, aTop + 30, b) ||
+        pointIsInsidePilar(aLeft + 8, aTop + 12, b);
 
     return gotCollision;
 }
@@ -182,12 +199,78 @@ function detectWallCollision(a) {
     return gotCollision;
 }
 
+/*
 function pointIsInsideRectangle(pointX, pointY, top, bottom, left, right) {
     var isInside = false;
 
     isInside = (pointX >= left) && (pointX <= right) && (pointY >= top) && (pointY <= bottom);
 
     return isInside;
+}
+*/
+
+function pointIsInsidePilar(pointX, pointY, pilar) {
+    var isInside = false,
+        pilarTop = pilar.getY(),
+        pilarBottom = pilar.getY() + pilar.getHeight(),
+        pilarLeft = pilar.getX(),
+        pilarRight = pilar.getX() + pilar.getWidth(),
+        pilarHeight = pilar.getHeight(),
+        scale = pilarHeight / 50,
+        i,
+        j,
+        pilarPointsX,
+        pilarPointsY;
+
+    if (pilarTop == 0) { // горен стълб
+        pilarPointsX = [pilarLeft, pilarLeft, pilarLeft + 7, pilarLeft + 9, pilarLeft + 16,
+                        pilarLeft + 22, pilarLeft + 29, pilarLeft + 30, pilarLeft + 31, pilarLeft + 37,
+                        pilarLeft + 37, pilarLeft + 49, pilarLeft + 49];
+        //[0, 0, 7, 9, 16, 
+        //22, 29, 30, 31, 37,
+        //37, 49, 49],
+        pilarPointsY = [pilarTop, pilarTop + 7 * scale, pilarTop + 18 * scale, pilarTop + 19 * scale, pilarTop + 35 * scale,
+                        pilarTop + 49 * scale, pilarTop + 49 * scale, pilarTop + 45 * scale, pilarTop + 35 * scale, pilarTop + 25 * scale,
+                        pilarTop + 15 * scale, pilarTop + 5 * scale, pilarTop];
+        //[0, 14, 36, 38, 70,
+        //99, 99, 91, 71, 50, 
+        //30, 9, 0],
+
+        isInside = pointIsInsidePolygon(pointX, pointY, pilarPointsX, pilarPointsY);
+    } else { // долен стълб
+        pilarPointsX = [pilarLeft, pilarLeft, pilarLeft + 12, pilarLeft + 12, pilarLeft + 18,
+                        pilarLeft + 19, pilarLeft + 22, pilarLeft + 26, pilarLeft + 30, pilarLeft + 32,
+                        pilarLeft + 34, pilarLeft + 39, pilarLeft + 42, pilarLeft + 48, pilarLeft + 49, pilarLeft + 49];
+        // 0 0 12 12 18
+        // 19 22 26 30 32 
+        // 34 39 42 48 49 49
+        pilarPointsY = [pilarTop + 49 * scale, pilarTop + 45 * scale, pilarTop + 34 * scale, pilarTop + 25 * scale, pilarTop + 14 * scale,
+                        pilarTop + 4 * scale, pilarTop, pilarTop, pilarTop + 5 * scale, pilarTop + 14 * scale,
+                        pilarTop + 16 * scale, pilarTop + 30 * scale, , pilarTop + 32 * scale, pilarTop + 39 * scale, pilarTop + 36 * scale, pilarTop + 49 * scale];
+        // 49 45 34 25 14
+        // 4 0 0 5 14 
+        // 16 30 32 39 36 49
+        isInside = pointIsInsidePolygon(pointX, pointY, pilarPointsX, pilarPointsY);
+    }
+
+    return isInside;
+}
+
+function pointIsInsidePolygon(x, y, xp, yp) {
+    var i, j, c = 0, npol = xp.length;
+
+    // алгоритъмът оттук:http://jsfromhell.com/math/is-point-in-poly
+    // http://www.webmasterworld.com/javascript/3551991.htm
+
+    for (i = 0, j = npol-1; i < npol; j = i++) { 
+        if ((((yp[i] <= y) && (y < yp[j])) || 
+        ((yp[j] <= y) && (y < yp[i]))) && 
+        (x < (xp[j] - xp[i]) * (y - yp[i]) / (yp[j] - yp[i]) + xp[i])) { 
+            c =!c; 
+        } 
+    }
+
+    return c; 
 }
 
 function getRandomValue(min, max) { // връща цяло число между мин и макс
@@ -198,7 +281,3 @@ function getRandomValue(min, max) { // връща цяло число между
 
     return (Math.random() * (max - min) + min) | 0;
 }
-
-// to do fon
-
-// nadpisi - s predawane na skore

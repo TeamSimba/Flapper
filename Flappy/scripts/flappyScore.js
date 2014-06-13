@@ -11,7 +11,7 @@
                 // добавя се флага за да брои подминатия стълб само веднъж
                 if (!obstaclesArray[i].flagged) {
                     obstaclesArray[i].flagged = true;
-                    console.log('not flagged' + obstaclesArray[i].flagged);
+                    //console.log('not flagged' + obstaclesArray[i].flagged);
                     gameScore++;
                     textArray[1].setText('SCORE: ' + gameScore/2); // Понеже птичката минава между 2 стълба едновременно, gameScore се дели;
                     textLayer.draw();
