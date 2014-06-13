@@ -2,7 +2,21 @@
     // textArray legend:
     // [0] - bump
     // [1] - score
-    // [2] - start game
+    // [2] - instructions rectangle
+    // [3] - instructions 
+    // [4] - start game
+    // [5] - restart text
+
+    var newText = createText(240, 180, 'GAME OVER', 25, 'Arial black', '#f00');
+    textLayer.add(newText);
+  //  textLayer.draw();
+    textArray.push(newText);
+
+    newText = createText(470, 5, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
+    textLayer.add(newText);
+  //  textLayer.draw();
+    textArray.push(newText);
+
     var rect = new Kinetic.Rect({
         x: 150,
         y: 100,
@@ -16,63 +30,43 @@
         opacity: 0.5,
         shadowOpacity: 0.2,
         cornerRadius: 10,
-        visible: true
+        visible: false
     });
     textLayer.add(rect);
+   // textLayer.draw();
+    textArray.push(rect);
+
     var instructions = createText(220, 160, 'INSTRUCTIONS\n\nPress START GAME to begin.\n Press UP ARROW to fly \nTry to avoid the blocks', 18,
-    'Calibri', 'black')
-    instructions.visible(true);
+    'Calibri', 'black');
     textLayer.add(instructions);
-
-
-    var newText = createText(240, 180, 'GAME OVER', 25, 'Arial black', '#f00');
-    textLayer.add(newText);
-    textLayer.draw();
-    textArray.push(newText);
-
-    newText = createText(470, 5, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
-    textLayer.add(newText);
-    textLayer.draw();
-    textArray.push(newText);
-
-
+  //  textLayer.draw();
+    textArray.push(instructions);
 
     var startText = createText(220, 120, 'START GAME', 25, 'Arial black', '#0f0');
     textLayer.add(startText);
-    textLayer.draw();
+   // textLayer.draw();
     textArray.push(startText);
 
+    var restartText = createText(20, 5, 'RESTART (F5)', 25, 'Arial black', '#0f0');
+    textLayer.add(restartText);
+    
+    textArray.push(restartText);
 
+    textLayer.draw();
+   
 
     startText.on('mousedown', function () {
-        console.log('mousedown');
-
         rect.hide();
-
-        startText.hide()
-
-        textLayer.add(startText);
-        textLayer.draw();
-        textArray.push(startText);
-
+        instructions.hide();
+        startText.hide();
 
         main(birdLayer, obstaclesLayer, textLayer, backgroundLayer); // оттук стартира играта
         textArray[1].show();
-        textLayer.draw();
+        textArray[5].show();
+    });
 
-
-        var restartText = createText(20, 5, 'RESTART (F5)', 25, 'Arial black', '#0f0');
-        restartText.visible(true);
-        textLayer.add(restartText);
-
-
-        textLayer.draw();
-
-        textArray.push(restartText);
-
-
-
-
+    restartText.on('mousedown', function () {
+        window.location.reload();
     });
 }
 
