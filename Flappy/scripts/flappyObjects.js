@@ -3,7 +3,7 @@
     var imageObj = new Image(),
         flappyImage;
 
-    imageObj.src = 'images/bird-sprite.png';
+    imageObj.src = 'images/bat-sprite.png';
 
     // да свърши работата след като се е заредила картинката
     // Edit 09.06.2014 - флапъра вече е анимиран
