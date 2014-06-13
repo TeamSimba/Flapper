@@ -67,8 +67,8 @@ function generateObstacles(obstaclesLayer) {
     // Разликата между top и 3 единици (150 пиксела) остава за долния ред стълбове, другото;
     var top = Math.floor((Math.random() * 4) + 1);
 
-    createObstacle(600, 0, 50, top * 50, 'images/pipe.png', obstaclesLayer);
-    createObstacle(600, (3 + top) * 50, 50, (5 - top) * 50, 'images/pipe.png', obstaclesLayer);
+    createObstacle(600, 0, 50, top * 50, 'images/stalactite.png', obstaclesLayer);
+    createObstacle(600, (3 + top) * 50, 50, (5 - top) * 50, 'images/stalagmite.png', obstaclesLayer);
 
     // някакво псевдо рандом генериране трябва тука 
     // има такива стълбове с дупка по средата

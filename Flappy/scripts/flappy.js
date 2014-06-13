@@ -45,8 +45,8 @@ function main(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     // createObstacle(400, 0, 50, 136, 'https://raw.githubusercontent.com/Nailses/Flappy/master/Flappy/images/vader-pilar.jpg', obstaclesLayer);
     // createObstacle(400, 300, 50, 136, 'https://raw.githubusercontent.com/Nailses/Flappy/master/Flappy/images/vader-pilar.jpg', obstaclesLayer);
 
-    createObstacle(600, 0, 50, 100, 'images/pipe.png', obstaclesLayer);
-    createObstacle(600, 250 , 50, 150, 'images/pipe.png', obstaclesLayer);
+    createObstacle(600, 0, 50, 100, 'images/stalactite.png', obstaclesLayer);
+    createObstacle(600, 250 , 50, 150, 'images/stalagmite.png', obstaclesLayer);
 
     obstaclesLayer.draw();
 
