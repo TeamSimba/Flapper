@@ -30,7 +30,9 @@ window.onload = function () {
 
 function startMenu(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer);
+    textArray[4].show();
     textArray[2].show();
+    textArray[3].show();
     textLayer.draw();
 }
 
