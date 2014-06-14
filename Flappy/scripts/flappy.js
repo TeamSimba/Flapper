@@ -96,7 +96,13 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
 
                             // проверка за колизии
                             var bumpedObstacle = detectObstacleCollision(flappy.image, obstaclesArray[i]);
+                            if (bumpedObstacle) {
+                                console.log('obstacle');
+                            }
                             var bumpedWall = detectWallCollision(flappy.image); // птиче блъска стена
+                            if (bumpedWall) {
+                                console.log('wall');
+                            }
                             if (bumpedObstacle || bumpedWall) {
                                 //console.log('BUMP');
                                 gameOver = true;
@@ -232,27 +238,38 @@ function pointIsInsidePilar(pointX, pointY, pilar) {
         pilarPointsY = [pilarTop, pilarTop + 7 * scale, pilarTop + 18 * scale, pilarTop + 19 * scale, pilarTop + 35 * scale,
                         pilarTop + 49 * scale, pilarTop + 49 * scale, pilarTop + 45 * scale, pilarTop + 35 * scale, pilarTop + 25 * scale,
                         pilarTop + 15 * scale, pilarTop + 5 * scale, pilarTop];
-        //[0, 14, 36, 38, 70,
-        //99, 99, 91, 71, 50, 
-        //30, 9, 0],
+        //[0, 7, 18, 19, 35,
+        //49, 19, 45, 35, 25, 
+        //15, 5, 0],
 
         isInside = pointIsInsidePolygon(pointX, pointY, pilarPointsX, pilarPointsY);
-    } else { // долен стълб
-        pilarPointsX = [pilarLeft, pilarLeft, pilarLeft + 12, pilarLeft + 12, pilarLeft + 18,
-                        pilarLeft + 19, pilarLeft + 22, pilarLeft + 26, pilarLeft + 30, pilarLeft + 32,
-                        pilarLeft + 34, pilarLeft + 39, pilarLeft + 42, pilarLeft + 48, pilarLeft + 49, pilarLeft + 49];
-        // 0 0 12 12 18
-        // 19 22 26 30 32 
-        // 34 39 42 48 49 49
-        pilarPointsY = [pilarTop + 49 * scale, pilarTop + 45 * scale, pilarTop + 34 * scale, pilarTop + 25 * scale, pilarTop + 14 * scale,
-                        pilarTop + 4 * scale, pilarTop, pilarTop, pilarTop + 5 * scale, pilarTop + 14 * scale,
-                        pilarTop + 16 * scale, pilarTop + 30 * scale, , pilarTop + 32 * scale, pilarTop + 39 * scale, pilarTop + 36 * scale, pilarTop + 49 * scale];
-        // 49 45 34 25 14
-        // 4 0 0 5 14 
-        // 16 30 32 39 36 49
+    } else if (pilarBottom == 400) { // долен стълб
+        pilarPointsX = [pilarLeft, pilarLeft + 49, pilarLeft + 49, pilarLeft + 48, pilarLeft + 42,
+                        pilarLeft + 39, pilarLeft + 34, pilarLeft + 32, pilarLeft + 30, pilarLeft + 26,
+                        pilarLeft + 22, pilarLeft + 19, pilarLeft + 18, pilarLeft + 12, pilarLeft + 12, pilarLeft
+                        ];
+        pilarPointsY = [pilarBottom, pilarBottom, pilarBottom - 3 * scale, pilarBottom - 10 * scale, pilarBottom - 18 * scale,
+                        pilarBottom - 20 * scale, pilarBottom - 24 * scale, pilarBottom - 26 * scale, pilarBottom - 44 * scale, pilarBottom - 50 * scale,
+                        pilarBottom - 50 * scale, pilarBottom - 46 * scale, pilarBottom - 36 * scale, pilarBottom - 24 * scale, pilarBottom - 16 * scale, pilarBottom - 5 * scale
+                        ];
+
         isInside = pointIsInsidePolygon(pointX, pointY, pilarPointsX, pilarPointsY);
+
+        // debugging
+        //if (isInside) {
+        //    console.log('dolen');
+        //    console.log(pointX);
+        //    console.log(pointY);
+        //    console.log(pilarPointsX);
+        //    console.log(pilarPointsY);
+        //    console.log('top ' + pilarTop);
+        //    console.log('bottom ' + pilarBottom);
+        //    console.log('pilarLeft ' + pilarLeft);
+        //    console.log('pilarRight ' + pilarRight);
+
+        //}
     }
-
+        
     return isInside;
 }
 
