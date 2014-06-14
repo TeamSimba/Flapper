@@ -4,7 +4,8 @@ var obstaclesArray = [],
     textArray = [],
     flappy = {},
     gameOver = false,
-    gameScore = 0;
+    gameScore = 0
+	timerId = 0;
 
 window.onload = function () {
     var stage,
@@ -108,6 +109,8 @@ function moveFlappy(birdLayer, textLayer, obstaclesLayer) {
                                 gameOver = true;
                                 textArray[0].show();
                                 textLayer.draw();
+								// спираме движението на фона
+								clearInterval(timerId);
                                 // Edit: 09.06.2014 - пилето умира с корема нагоре
                                 // ето това  стартира анимация dead
                                 flappy.image.animation('dead');                               
