@@ -12,6 +12,7 @@ function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     var maxWidth = 300,
         left = 150;
 
+
     var newText = createText(left, 180, maxWidth, 'GAME OVER', 25, 'Arial black', '#f00');
     textLayer.add(newText);
     //  textLayer.draw();
