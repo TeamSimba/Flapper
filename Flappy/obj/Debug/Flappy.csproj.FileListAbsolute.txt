@@ -9,3 +9,9 @@ C:\Users\iliana\Documents\GitHub\Flapper\Flappy\bin\Flappy.pdb
 C:\Users\iliana\Documents\GitHub\Flapper\Flappy\obj\Debug\Flappy.csprojResolveAssemblyReference.cache
 C:\Users\iliana\Documents\GitHub\Flapper\Flappy\obj\Debug\Flappy.dll
 C:\Users\iliana\Documents\GitHub\Flapper\Flappy\obj\Debug\Flappy.pdb
+c:\work\VS2013\Repos\Flapper\Flappy\bin\Flappy.dll.config
+c:\work\VS2013\Repos\Flapper\Flappy\bin\Flappy.dll
+c:\work\VS2013\Repos\Flapper\Flappy\bin\Flappy.pdb
+c:\work\VS2013\Repos\Flapper\Flappy\obj\Debug\Flappy.csprojResolveAssemblyReference.cache
+c:\work\VS2013\Repos\Flapper\Flappy\obj\Debug\Flappy.dll
+c:\work\VS2013\Repos\Flapper\Flappy\obj\Debug\Flappy.pdb

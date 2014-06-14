@@ -18,7 +18,7 @@ function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     //  textLayer.draw();
     textArray.push(newText);
 
-    newText = createText(left*2, 5, maxWidth, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
+    newText = createText(left * 2, 5, maxWidth, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
     textLayer.add(newText);
     //  textLayer.draw();
     textArray.push(newText);
