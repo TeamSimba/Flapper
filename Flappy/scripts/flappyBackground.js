@@ -43,7 +43,7 @@
 	var background = document.getElementById('slide'),
 		bgWidth = 600,
 		position = 0,
-		speed = .9;
+		speed = 2; // скорост на движение на фона
 
 	timerId = setInterval(animateBackground, 30);
 
