@@ -1,4 +1,6 @@
-﻿function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
+﻿var newGame = true;
+
+function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     // textArray legend:
     // [0] - bump
     // [1] - score
@@ -7,18 +9,21 @@
     // [4] - start game
     // [5] - restart text
 
-    var newText = createText(240, 180, 'GAME OVER', 25, 'Arial black', '#f00');
+    var maxWidth = 300,
+        left = 150;
+
+    var newText = createText(left, 180, maxWidth, 'GAME OVER', 25, 'Arial black', '#f00');
     textLayer.add(newText);
     //  textLayer.draw();
     textArray.push(newText);
 
-    newText = createText(470, 5, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
+    newText = createText(left*2, 5, maxWidth, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
     textLayer.add(newText);
     //  textLayer.draw();
     textArray.push(newText);
 
     var rect = new Kinetic.Rect({
-        x: 150,
+        x: left,
         y: 100,
         stroke: '#555',
         fill: '#ddd',
@@ -36,28 +41,28 @@
     // textLayer.draw();
     textArray.push(rect);
 
-    var instructions = createText(220, 160, 'INSTRUCTIONS\n\nClick START GAME, or\n press Enter to begin.\n Press UP ARROW to fly \nTry to avoid the blocks', 18,
+    var instructions = createText(left, 160, maxWidth, 'INSTRUCTIONS\n\nClick START GAME, or\npress Enter to begin.\nPress UP ARROW to fly\nTry to avoid the blocks', 18,
     'Calibri', 'black');
     textLayer.add(instructions);
     //  textLayer.draw();
     textArray.push(instructions);
 
-    var startText = createText(220, 120, 'START GAME', 25, 'Arial black', '#0f0');
+    var startText = createText(left, 120, maxWidth, 'START GAME', 25, 'Arial black', '#0f0');
     textLayer.add(startText);
     // textLayer.draw();
     textArray.push(startText);
 
-    var restartText = createText(20, 5, 'RESTART (F5)', 25, 'Arial black', '#0f0');
+    var restartText = createText(20, 5, maxWidth, 'RESTART (F5)', 25, 'Arial black', '#0f0');
     textLayer.add(restartText);
 
     textArray.push(restartText);
 
     textLayer.draw();
 
-
     startText.on('mousedown', startGame);
     window.addEventListener('keydown', function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode == 13 && newGame) {
+            newGame = false;
             startGame();
         }
     });
@@ -77,11 +82,12 @@
     }
 }
 
-function createText(x, y, text, fontSize, fontFamily, fill) {
+function createText(x, y, width, text, fontSize, fontFamily, fill) {
     // създава ги невидими
     var myText = new Kinetic.Text({
         x: x,
         y: y,
+        width: width,
         text: text,
         fontSize: fontSize,
         fontFamily: fontFamily,
@@ -91,6 +97,7 @@ function createText(x, y, text, fontSize, fontFamily, fill) {
         shadowOffset: { x: 2, y: 2 },
         shadowOpacity: 0.5,
         visible: false,
+        align: 'center'
     });
 
     return myText;
