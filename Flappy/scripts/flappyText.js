@@ -9,12 +9,12 @@
 
     var newText = createText(240, 180, 'GAME OVER', 25, 'Arial black', '#f00');
     textLayer.add(newText);
-  //  textLayer.draw();
+    //  textLayer.draw();
     textArray.push(newText);
 
     newText = createText(470, 5, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
     textLayer.add(newText);
-  //  textLayer.draw();
+    //  textLayer.draw();
     textArray.push(newText);
 
     var rect = new Kinetic.Rect({
@@ -33,41 +33,48 @@
         visible: false
     });
     textLayer.add(rect);
-   // textLayer.draw();
+    // textLayer.draw();
     textArray.push(rect);
 
-    var instructions = createText(220, 160, 'INSTRUCTIONS\n\nPress START GAME to begin.\n Press UP ARROW to fly \nTry to avoid the blocks', 18,
+    var instructions = createText(220, 160, 'INSTRUCTIONS\n\nClick START GAME, or\n press Enter to begin.\n Press UP ARROW to fly \nTry to avoid the blocks', 18,
     'Calibri', 'black');
     textLayer.add(instructions);
-  //  textLayer.draw();
+    //  textLayer.draw();
     textArray.push(instructions);
 
     var startText = createText(220, 120, 'START GAME', 25, 'Arial black', '#0f0');
     textLayer.add(startText);
-   // textLayer.draw();
+    // textLayer.draw();
     textArray.push(startText);
 
     var restartText = createText(20, 5, 'RESTART (F5)', 25, 'Arial black', '#0f0');
     textLayer.add(restartText);
-    
+
     textArray.push(restartText);
 
     textLayer.draw();
-   
 
-    startText.on('mousedown', function () {
+
+    startText.on('mousedown', startGame);
+    window.addEventListener('keydown', function (e) {
+        if (e.keyCode == 13) {
+            startGame();
+        }
+    });
+
+    restartText.on('mousedown', function () {
+        window.location.reload();
+    });
+
+    function startGame() {
         rect.hide();
         instructions.hide();
         startText.hide();
         textArray[1].show();
         textArray[5].show();
         main(birdLayer, obstaclesLayer, textLayer, backgroundLayer); // оттук стартира играта
-        
-    });
 
-    restartText.on('mousedown', function () {
-        window.location.reload();
-    });
+    }
 }
 
 function createText(x, y, text, fontSize, fontFamily, fill) {
@@ -83,8 +90,4 @@ function createText(x, y, text, fontSize, fontFamily, fill) {
         shadowBlur: 2,
         shadowOffset: { x: 2, y: 2 },
         shadowOpacity: 0.5,
-        visible: false,
-    });
-
-    return myText;
-}
+        visible: fals
