@@ -90,4 +90,8 @@ function createText(x, y, text, fontSize, fontFamily, fill) {
         shadowBlur: 2,
         shadowOffset: { x: 2, y: 2 },
         shadowOpacity: 0.5,
-        visible: fals
+        visible: false,
+    });
+
+    return myText;
+}
