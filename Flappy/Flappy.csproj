@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\TeamSimba-Flapper-Project.docx" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Documentation\presentation.ppt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
