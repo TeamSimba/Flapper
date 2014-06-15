@@ -1,6 +1,7 @@
 ﻿var newGame = true;
 
 function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
+    // set all game texts
     // textArray legend:
     // [0] - bump
     // [1] - score
@@ -10,17 +11,15 @@ function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
     // [5] - restart text
 
     var maxWidth = 300,
-        left = 150;
+        left = 150,
+        newText;
 
-
-    var newText = createText(left, 180, maxWidth, 'GAME OVER', 25, 'Arial black', '#f00');
+    newText = createText(left, 180, maxWidth, 'GAME OVER', 25, 'Arial black', '#f00');
     textLayer.add(newText);
-    //  textLayer.draw();
     textArray.push(newText);
 
     newText = createText(left * 2, 5, maxWidth, 'SCORE: ' + gameScore, 25, 'Arial Black', '#0f0');
     textLayer.add(newText);
-    //  textLayer.draw();
     textArray.push(newText);
 
     var rect = new Kinetic.Rect({
@@ -39,27 +38,23 @@ function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
         visible: false
     });
     textLayer.add(rect);
-    // textLayer.draw();
     textArray.push(rect);
 
     var instructions = createText(left, 160, maxWidth, 'INSTRUCTIONS\n\nClick START GAME, or\npress Enter to begin.\nPress UP ARROW to fly\nTry to avoid the blocks', 18,
     'Calibri', 'black');
     textLayer.add(instructions);
-    //  textLayer.draw();
     textArray.push(instructions);
 
     var startText = createText(left, 120, maxWidth, 'START GAME', 25, 'Arial black', '#0f0');
     textLayer.add(startText);
-    // textLayer.draw();
     textArray.push(startText);
 
     var restartText = createText(20, 5, maxWidth, 'RESTART (F5)', 25, 'Arial black', '#0f0');
     textLayer.add(restartText);
-
     textArray.push(restartText);
-
     textLayer.draw();
 
+    // start game on text click or enter button pressed
     startText.on('mousedown', startGame);
     window.addEventListener('keydown', function (e) {
         if (e.keyCode == 13 && newGame) {
@@ -68,23 +63,23 @@ function setTextLayer(birdLayer, obstaclesLayer, textLayer, backgroundLayer) {
         }
     });
 
+    // restart game on text click
     restartText.on('mousedown', function () {
         window.location.reload();
     });
 
+    // start the game
     function startGame() {
         rect.hide();
         instructions.hide();
         startText.hide();
         textArray[1].show();
         textArray[5].show();
-        main(birdLayer, obstaclesLayer, textLayer, backgroundLayer); // оттук стартира играта
-
+        main(birdLayer, obstaclesLayer, textLayer, backgroundLayer);
     }
 }
 
 function createText(x, y, width, text, fontSize, fontFamily, fill) {
-    // създава ги невидими
     var myText = new Kinetic.Text({
         x: x,
         y: y,
