@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documentation\Readme.txt" />
     <Content Include="images\vader-pilar.jpg" />
     <Content Include="images\vader.jpg" />
     <Content Include="libs\kineticjs\kinetic-custom.js" />
@@ -74,6 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documentation\TeamSimba-Flapper-Project.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
