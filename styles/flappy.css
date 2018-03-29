@@ -25,7 +25,7 @@
 #slide {
     /* twice the width of the image */
     background-repeat: repeat-x;
-    background-image: url("../images/cave12.png");
+    background-image: url("./images/cave12.PNG");
     height: inherit;
 	position: relative;
     width: 1200px;
